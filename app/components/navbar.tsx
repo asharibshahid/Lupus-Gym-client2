@@ -13,7 +13,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useGSAP(() => {
-    // Desktop entrance animation
+    // Desktop animations
     gsap.from(".desktop-nav", {
       y: -100,
       opacity: 0,
@@ -22,7 +22,6 @@ export default function Navbar() {
       delay: 0.5
     });
 
-    // Logo animation
     gsap.from(".logo-img", {
       scale: 0,
       rotate: -180,
@@ -30,7 +29,6 @@ export default function Navbar() {
       ease: "elastic.out(1, 0.5)"
     });
 
-    // Nav items animation
     gsap.from(".nav-item", {
       y: 30,
       opacity: 0,
@@ -43,7 +41,7 @@ export default function Navbar() {
       }
     });
 
-    // CTA button animation
+    // CTA button pulse
     const ctaTl = gsap.timeline({ repeat: -1 });
     ctaTl.to(".cta-button", {
       boxShadow: "0 0 25px rgba(37, 211, 102, 0.5)",
@@ -57,53 +55,49 @@ export default function Navbar() {
       ease: "power1.inOut"
     });
 
-    // Hover animations
+    // Nav item hover
     (gsap.utils.toArray(".nav-item") as HTMLElement[]).forEach((item) => {
       item.addEventListener('mouseenter', () => {
-        gsap.to(item, {
-          y: -3,
-          color: "#FF4655",
-          duration: 0.3
-        });
+        gsap.to(item, { y: -3, color: "#FF4655", duration: 0.3 });
       });
       item.addEventListener('mouseleave', () => {
-        gsap.to(item, {
-          y: 0,
-          color: "#FFFFFF",
-          duration: 0.3
-        });
+        gsap.to(item, { y: 0, color: "#FFFFFF", duration: 0.3 });
       });
     });
+
+    // Mobile menu initial setup
+    gsap.set(".mobile-nav", { x: '-100%' });
+    gsap.set(".menu-backdrop", { opacity: 0, pointerEvents: 'none' });
   });
 
-  // Mobile menu animations
   const toggleMenu = () => {
     if (isMenuOpen) {
+      // Close menu
       gsap.to(".mobile-nav", {
         x: '-100%',
-        duration: 0.8,
+        duration: 0.5,
         ease: "power4.out"
       });
       gsap.to(".menu-backdrop", {
         opacity: 0,
-        duration: 0.5,
-        onComplete: () => { document.body.style.overflow = 'auto'; }
+        duration: 0.3,
+        onComplete: () => {
+          document.body.style.overflow = 'auto';
+          gsap.set(".menu-backdrop", { pointerEvents: 'none' });
+        }
       });
     } else {
+      // Open menu
       document.body.style.overflow = 'hidden';
-      gsap.fromTo(".mobile-nav", 
-        { x: '-100%' },
-        { x: '0%', duration: 0.8, ease: "power4.out" }
-      );
-      gsap.fromTo(".menu-backdrop",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 }
-      );
-      gsap.from(".mobile-nav-item", {
-        x: -50,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.6
+      gsap.set(".menu-backdrop", { pointerEvents: 'all' });
+      gsap.to(".mobile-nav", {
+        x: '0%',
+        duration: 0.5,
+        ease: "power4.out"
+      });
+      gsap.to(".menu-backdrop", {
+        opacity: 1,
+        duration: 0.3
       });
     }
     setIsMenuOpen(!isMenuOpen);
@@ -172,15 +166,21 @@ export default function Navbar() {
           <button 
             onClick={toggleMenu}
             className="text-white text-2xl z-50 p-2"
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? '✕' : '☰'}
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div className="menu-backdrop fixed inset-0 bg-black/80 z-40" onClick={toggleMenu} />
+        {/* Mobile Menu Backdrop */}
+        <div 
+          className="menu-backdrop fixed inset-0 bg-black/80 z-40" 
+          onClick={toggleMenu}
+          style={{ pointerEvents: 'none' }}
+        />
         
-        <div className="mobile-nav fixed left-0 top-0 h-full w-80 bg-gray-900/95 backdrop-blur-xl z-50 shadow-2xl p-8">
+        {/* Mobile Menu Content */}
+        <div className="mobile-nav fixed left-0 top-0 h-full w-80 bg-gray-900/95 backdrop-blur-xl z-50 shadow-2xl p-8 transform -translate-x-full">
           <div className="space-y-8 mt-16">
             {['Home', 'Programs', 'Trainers', 'Schedule', 'Pricing'].map((item) => (
               <Link
@@ -192,18 +192,16 @@ export default function Navbar() {
                 {item}
               </Link>
             ))}
-           
-
-<a
-  href="https://wa.me/96895593558"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="cta-button bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-full font-bold transform transition-all duration-300 flex items-center space-x-2"
->
-  <span>Join on WhatsApp</span>
-  <FaWhatsapp className="w-5 h-5" />
-</a>
-
+            
+            <a
+              href="https://wa.me/96895593558"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-button bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-full font-bold transform transition-all duration-300 flex items-center space-x-2"
+            >
+              <span>Join on WhatsApp</span>
+              <FaWhatsapp className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </nav>
