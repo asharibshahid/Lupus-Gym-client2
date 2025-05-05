@@ -10,10 +10,10 @@ export default function ContactPage() {
         {/* Contact Info Section */}
         <div>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-red-500">
-            Let's Connect
+            Lets Connect
           </h2>
           <p className="text-gray-300 mb-6">
-            Have questions? Ready to join? Reach out to us anytime — we're always here for warriors like you.
+            Have questions? Ready to join? Reach out to us anytime — we are always here for warriors like you.
           </p>
 
           <div className="space-y-6">
