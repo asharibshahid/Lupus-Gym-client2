@@ -40,7 +40,7 @@ export default function ProgramsSection() {
     });
 
     // Hover plasma effect
-    (gsap.utils.toArray('.program-card') as HTMLElement[]).forEach((card, i) => {
+    (gsap.utils.toArray('.program-card') as  HTMLElement[]).forEach((card) => {
       card.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
