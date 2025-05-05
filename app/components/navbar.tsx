@@ -120,7 +120,7 @@ export default function Navbar() {
             <div>
               <h1 className="text-2xl font-black text-white">LUPUS GYM</h1>
               <p className="text-sm text-red-400 font-medium tracking-wide">
-                TRAIN HARD • STAY STRONG • JOIN THE PACK
+                TRAIN HARD > STAY STRONG > JOIN THE PACK > Demo 
               </p>
             </div>
           </Link>
