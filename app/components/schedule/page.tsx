@@ -19,7 +19,7 @@ export default function ScheduleSection() {
     });
 
     // Schedule cards animation
-     (gsap.utils.toArray('.schedule-card') as HTMLElement[]).forEach((card, i) => {
+     (gsap.utils.toArray('.schedule-card') as  HTMLElement[]).forEach((card) => {
       ScrollTrigger.create({
         trigger: card,
         start: "top 80%",
@@ -59,7 +59,7 @@ export default function ScheduleSection() {
     updateTime();
 
     // Hover effects for table
-     (gsap.utils.toArray('.schedule-row') as HTMLElement[]).forEach((row, i) => {
+     (gsap.utils.toArray('.schedule-row') as  HTMLElement[]).forEach((row) => {
       row.addEventListener('mouseenter', () => {
         gsap.to(row, {
           backgroundColor: '#ffffff08',
