@@ -24,7 +24,7 @@ export default function TrainersSection() {
     );
 
     // 3D Card Flip Effect
-     (gsap.utils.toArray('.trainer-card') as HTMLElement[]).forEach((card, i) => {
+     (gsap.utils.toArray('.trainer-card') as  HTMLElement[]).forEach((card) => {
       ScrollTrigger.create({
         trigger: card,
         start: "top 80%",
@@ -40,7 +40,7 @@ export default function TrainersSection() {
     });
 
     // Hover Particle Effect
-    (gsap.utils.toArray('.trainer-card') as HTMLElement[]).forEach((card, i) => {
+    (gsap.utils.toArray('.trainer-card') as  HTMLElement[]).forEach((card) => {
       card.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
