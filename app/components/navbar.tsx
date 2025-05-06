@@ -91,12 +91,15 @@ export default function Navbar() {
         <div ref={backdropRef} className="menu-backdrop fixed inset-0 bg-black/80 z-40" onClick={toggleMenu} />
         
         <div ref={mobileNavRef} className="mobile-nav fixed left-0 top-0 h-full w-72 bg-gray-900/95 backdrop-blur-xl z-50 shadow-2xl p-6">
-          <div className="space-y-6 mt-20">
-            {['Home', 'Programs', 'Trainers', 'Schedule', 'Pricing'].map((item) => (
-              <Link key={item} href={`/${item.toLowerCase()}`} onClick={toggleMenu}
-                className="mobile-nav-item block text-xl text-white font-medium hover:text-red-500 transition-colors">
-                {item}
-              </Link>
+         {['Home', 'Programs', 'Trainers', 'Schedule', 'Pricing'].map((item) => (
+    <Link
+      key={item}
+      href={item === 'Home' ? '/' : `/components/${item.toLowerCase()}`}
+      onClick={toggleMenu}
+      className="mobile-nav-item block text-xl text-white font-medium hover:text-red-500 transition-colors"
+    >
+      {item}
+    </Link>
             ))}
             
             <a href="https://wa.me/96895593558" target="_blank" rel="noreferrer"
