@@ -22,8 +22,7 @@ export default function Navbar() {
     const ctaTl = gsap.timeline({ repeat: -1 });
     ctaTl.to(".cta-button", { boxShadow: "0 0 25px rgba(37, 211, 102, 0.5)", scale: 1.02, duration: 1.5 })
          .to(".cta-button", { boxShadow: "0 0 10px rgba(37, 211, 102, 0.3)", scale: 1, duration: 1.5 });
-
-    gsap.utils.toArray(".nav-item").forEach((item) => {
+(gsap.utils.toArray(".nav-item") as HTMLElement[]).forEach((item) => {
       item.addEventListener('mouseenter', () => gsap.to(item, { y: -3, color: "#FF4655", duration: 0.3 }));
       item.addEventListener('mouseleave', () => gsap.to(item, { y: 0, color: "#FFFFFF", duration: 0.3 }));
     });
